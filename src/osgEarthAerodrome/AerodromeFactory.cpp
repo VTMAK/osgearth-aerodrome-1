@@ -284,7 +284,7 @@ void AerodromeFactory::createFeatureNodes(P featureOpts, AerodromeNode* aerodrom
         /* **************************************** */
         /* Necessary but not sure why               */
 
-        const SpatialReference* ecefSRS = f->getSRS()->getGeocentricSRS();
+        const SpatialReference* ecefSRS = f->getSRS()->getGeographicSRS();
 
         /* **************************************** */
 
@@ -359,7 +359,7 @@ void AerodromeFactory::createMergedFeatureNodes(P featureOpts, AerodromeNode* ae
         /* **************************************** */
         /* Necessary but not sure why               */
 
-        const SpatialReference* ecefSRS = f->getSRS()->getGeocentricSRS();
+        const SpatialReference* ecefSRS = f->getSRS()->getGeographicSRS();
 
         /* **************************************** */
 
@@ -425,7 +425,7 @@ void AerodromeFactory::createBoundaryNodes(BoundaryFeatureOptions boundaryOpts, 
         /* **************************************** */
         /* Necessary but not sure why               */
 
-        const SpatialReference* ecefSRS = f->getSRS()->getGeocentricSRS();
+        const SpatialReference* ecefSRS = f->getSRS()->getGeographicSRS();
 
         /* **************************************** */
 
@@ -553,9 +553,9 @@ AerodromeFactory::seedAerodromes(AerodromeCatalog* catalog, const osgDB::Options
 
     // set up a spatial indexing tree
     HTMGroup* tree = new HTMGroup();
-    tree->setMaximumObjectsPerCell(4);
-    tree->setMaxRange( _lodRange );
-    tree->setStoreObjectsInLeavesOnly(true);
+    tree->setMaxLeaves(4);
+    tree->setMaxLeafRange( _lodRange );
+    //tree->setStoreObjectsInLeavesOnly(true);
     this->addChild( tree );
 
     OE_INFO << LC << "Seeding aerodromes from boundaries." << std::endl;
